@@ -10,7 +10,9 @@
 | encrypted_password    | string  | null: false |
 | family_name           | string  | null: false |
 | first_name            | string  | null: false |
-| birthday              | integer | null: false |
+| family_name_furigana  | string  | null: false |
+| first_name_furigana   | string  | null: false |
+| birthday              | date    | null: false |
 
 ### Association
 
@@ -26,10 +28,10 @@
 | ------           | ------  | ----------- |
 | name             | string  | null: false |
 | description      | text    | null: false |
-| category         | string  | null: false |
-| status           | string  | null: false |
+| category         | integer | null: false |
+| status           | integer | null: false |
 | delivery_charge  | integer | null: false |
-| shipment_source  | string  | null: false |
+| shipment_source  | integer | null: false |
 | Shipping days    | integer | null: false |
 | price            | integer | null: false | 
 
@@ -42,13 +44,13 @@
 ## shipping_addresses テーブル
 | Column           | Type    | Options     |
 | ------           | ------  | ----------- |
-| postal code      | integer | null: false |
+| postal_code      | string  | null: false |
 | prefectures      | string  | null: false |
 | municipality     | string  | null: false |
-| address          | integer | null: false |
-| building         | integer |
+| address          | string  | null: false |
+| building         | string  |
 | shipment_source  | string  | null: false |
-| phone number     | integer | null: false |
+| phone number     | string  | null: false |
 
 ### Association
 - belongs_to :user
@@ -59,7 +61,7 @@
 ## sales テーブル
 | Column   | Type    | Options     |
 | ------   | ------  | ----------- |
-| sales_id | integer | null: false |
+| item_id  | integer | null: false |
 | user_id  | integer | null: false |
 
 ### Association
