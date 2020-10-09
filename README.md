@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_one :sales
+- has_many :sales
 
 
 
@@ -34,27 +34,27 @@
 | shipment_source_id | integer    | null: false |
 | Shipping day_id    | integer    | null: false |
 | price              | integer    | null: false | 
-| user_id            | references | null: false |
+| user               | references | null: false |
 
 
 ### Association
 
 - belongs_to :user
-- has_many :sales
+- has_one :sales
 
 
 
 ## shipping_addresses テーブル
-| Column           | Type       | Options     |
-| ------           | ------     | ----------- |
-| postal_code      | integer    | null: false |
-| prefectures      | integer    | null: false |
-| municipality     | string     | null: false |
-| address          | string     | null: false |
-| building         | string     |
-| shipment_source  | string     | null: false |
-| phone number     | string     | null: false |
-| sale_id          | references | null: false |
+| Column              | Type       | Options     |
+| ------              | ------     | ----------- |
+| postal_code_id      | string    | null: false |
+| prefectures_id      | integer    | null: false |
+| municipality        | string     | null: false |
+| address             | string     | null: false |
+| building            | string     |
+| shipment_source     | string     | null: false |
+| phone number        | string     | null: false |
+| sale                | references | null: false |
 
 ### Association
 - belongs_to :sale
@@ -64,7 +64,7 @@
 | Column   | Type    | Options     |
 | ------   | ------  | ----------- |
 | item_id  | integer | null: false |
-| user_id  | integer | null: false |
+| user_id  | integer | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
