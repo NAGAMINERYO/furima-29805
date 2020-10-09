@@ -16,46 +16,48 @@
 
 ### Association
 
-- has_many :item
-- has_many :sales
-- has_many :shipping_address
+- has_many :items
+- has_one :sales
+
 
 
 
 ## items テーブル
 
-| Column           | Type    | Options     |
-| ------           | ------  | ----------- |
-| name             | string  | null: false |
-| description      | text    | null: false |
-| category         | integer | null: false |
-| status           | integer | null: false |
-| delivery_charge  | integer | null: false |
-| shipment_source  | integer | null: false |
-| Shipping days    | integer | null: false |
-| price            | integer | null: false | 
+| Column             | Type       | Options     |
+| ------             | ------     | ----------- |
+| name               | string     | null: false |
+| description        | text       | null: false |
+| category_id        | integer    | null: false |
+| status_id          | integer    | null: false |
+| delivery_charge_id | integer    | null: false |
+| shipment_source_id | integer    | null: false |
+| Shipping day_id    | integer    | null: false |
+| price              | integer    | null: false | 
+| user_id            | references | null: false |
+
 
 ### Association
 
 - belongs_to :user
+- has_many :sales
 
 
 
 ## shipping_addresses テーブル
-| Column           | Type    | Options     |
-| ------           | ------  | ----------- |
-| postal_code      | string  | null: false |
-| prefectures      | string  | null: false |
-| municipality     | string  | null: false |
-| address          | string  | null: false |
-| building         | string  |
-| shipment_source  | string  | null: false |
-| phone number     | string  | null: false |
+| Column           | Type       | Options     |
+| ------           | ------     | ----------- |
+| postal_code      | integer    | null: false |
+| prefectures      | integer    | null: false |
+| municipality     | string     | null: false |
+| address          | string     | null: false |
+| building         | string     |
+| shipment_source  | string     | null: false |
+| phone number     | string     | null: false |
+| sale_id          | references | null: false |
 
 ### Association
-- belongs_to :user
-
-
+- belongs_to :sale
 
 
 ## sales テーブル
@@ -66,3 +68,5 @@
 
 ### Association
 - belongs_to :user
+- belongs_to :item
+- has_one :shipping_address
