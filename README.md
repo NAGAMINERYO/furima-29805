@@ -32,7 +32,7 @@
 | status_id          | integer    | null: false |
 | delivery_charge_id | integer    | null: false |
 | shipment_source_id | integer    | null: false |
-| Shipping_day_id    | integer    | null: false |
+| shipping_day_id    | integer    | null: false |
 | price              | integer    | null: false | 
 | user               | references | null: false |
 
@@ -62,7 +62,7 @@
 ## sales テーブル
 | Column   | Type       | Options                        |
 | ------   | ------     | -----------                    |
-| ite      | references | null: false, foreign_key: true |
+| item     | references | null: false, foreign_key: true |
 | user     | references | null: false, foreign_key: true |
 
 ### Association
