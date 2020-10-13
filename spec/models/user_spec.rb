@@ -63,22 +63,70 @@ describe User do
         expect(@user.errors.full_messages).to include("First nameを入力してください", "First nameユーザー本名は全角（漢字・ひらがな・カタカナ）で入力")
       end
 
+      it "first_nameが英字では登録できない" do
+        @user.first_name = "abe"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First nameユーザー本名は全角（漢字・ひらがな・カタカナ）で入力")
+      end
+
+      it "first_nameが数字では登録できない" do
+        @user.first_name = "1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First nameユーザー本名は全角（漢字・ひらがな・カタカナ）で入力")
+      end
+
       it "first_name_kanaが空では登録できない" do
         @user.first_name_kana = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kanaを入力してください", "First name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
       end
 
-      it "last_name_が空では登録できない" do
-          @user.last_name_kana = ""
+      it "first_name_kanaが英字では登録できない" do
+        @user.first_name_kana = "abe"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
+      end
+
+      it "first_name_kanaが数字では登録できない" do
+        @user.first_name_kana = "1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
+      end
+
+      it "last_nameが空では登録できない" do
+          @user.last_name= ""
           @user.valid?
-          expect(@user.errors.full_messages).to include("Last name kanaを入力してください", "Last name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
+          expect(@user.errors.full_messages).to include("Last nameを入力してください", "Last nameユーザー本名は全角（漢字・ひらがな・カタカナ）で入力")
+      end
+
+      it "last_nameが英字では登録できない" do
+        @user.last_name= "abe"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last nameユーザー本名は全角（漢字・ひらがな・カタカナ）で入力")
+      end
+
+      it "last_nameが数字では登録できない" do
+        @user.last_name= "1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last nameユーザー本名は全角（漢字・ひらがな・カタカナ）で入力")
       end
 
       it "last_name_kanaが空では登録できない" do
         @user.last_name_kana = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name kanaを入力してください", "Last name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
+      end
+
+      it "last_name_kanaが英字では登録できない" do
+        @user.last_name_kana = "abe"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
+      end
+
+      it "last_name_kanaが数字では登録できない" do
+        @user.last_name_kana = "1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kanaユーザー本名のフリガナは全角（カタカナ）で入力させること")
       end
 
     end
