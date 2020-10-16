@@ -8,16 +8,15 @@ window.addEventListener('load', function(){
     
   
     if( 300 <= cost && cost <= 9999999) {
-    const tax = (cost / 10)
-    const gain = (cost - tax)
-    fee.innerHTML = tax
-    profit.innerHTML = gain
-
+      const tax = (cost / 10)
+      const gain = (cost - tax)
+      fee.innerHTML = tax
+      profit.innerHTML = gain
     }else {
-    const tax = '-'
-    const gain = '-'
-    fee.innerHTML = tax
-    profit.innerHTML = gain
+      const tax = '-'
+      const gain = '-'
+      fee.innerHTML = tax
+      profit.innerHTML = gain
     }
     
   })

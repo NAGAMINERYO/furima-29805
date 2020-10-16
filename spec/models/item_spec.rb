@@ -30,10 +30,22 @@ describe Item do
         expect(@item.errors.full_messages).to include("Categoryは1以外の値にしてください")
       end
 
+      it "status_idが空だと登録できない" do
+        @item.status_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Statusを入力してください")
+      end
+
       it "status_idが1では登録できない" do
         @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Statusは1以外の値にしてください")
+      end
+
+      it "delivery_charge_idが空だと登録できない" do
+        @item.delivery_charge_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery chargeを入力してください")
       end
 
       it "delivery_charge_idが1では登録できない" do
@@ -42,6 +54,12 @@ describe Item do
         expect(@item.errors.full_messages).to include("Delivery chargeは1以外の値にしてください")
       end
 
+      it "shipment_source_idが空だと登録できない" do
+        @item.shipment_source_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipment sourceを入力してください")
+      end
+      
       it "shipment_source_idが1では登録できない" do
         @item.shipment_source_id = 1
         @item.valid?
@@ -49,10 +67,22 @@ describe Item do
       end
 
 
+      it "shipping_day_idが空だと登録できない" do
+        @item.shipping_day_id= ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping dayを入力してください")
+      end
+      
       it "shipping_day_idが1では登録できない" do
         @item.shipping_day_id= 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping dayは1以外の値にしてください")
+      end
+
+      it "priceが空だと登録できない" do
+        @item.price = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Priceを入力してください")
       end
 
       it "priceが文字や英字では登録できない" do
