@@ -18,7 +18,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Nameを入力してください")
       end
 
-      it "descriptionが1では登録できない" do
+      it "descriptionが空だと登録できない" do
         @item.description = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Descriptionを入力してください")
@@ -59,6 +59,18 @@ describe Item do
         @item.price = "あべ"
         @item.valid?
         expect(@item.errors.full_messages).to include("Priceは不正な値です")
+      end
+
+      it "priceが299以下だと登録できない"do
+        @item.price = "299"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Priceは300より大きい値にしてください")
+      end
+      
+      it "priceが10000000以上だと登録できない"do
+        @item.price = "10000000"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Priceは9999999より小さい値にしてください")
       end
       
     end
