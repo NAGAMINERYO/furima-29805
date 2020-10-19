@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :edit, :update]
   before_action :set_tweet, only: [:edit, :show, :update]
   def index
     @items = Item.all.order('created_at DESC')
@@ -22,13 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if user_signed_in? && current_user.id !== @item.user_id
-    
-    else
-      redirect_to item_path(@item)
-    end
-
-    
+    redirect_to item_path(@item) unless current_user.id == @item.user_id
   end
 
   def update
