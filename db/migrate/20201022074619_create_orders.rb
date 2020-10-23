@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :phone_number   ,null: false   #電話番号
       t.references :purchaser  ,null: false, foreign_key: true
       t.timestamps
+      
     end
   end
 end

@@ -2,17 +2,20 @@ class OrderPurchaser
   include ActiveModel::Model
   attr_accessor :item_id, :user_id, :postal_code, :prefectures, :municipality, :address ,:building, :phone_number, :purchaser_id, :token
   
-  validates :item_id, presence: true
-  validates :user_id, presence: true
-  validates :postal_code, presence: true
-  validates :prefectures, presence: true
-  validates :municipality, presence: true
-  validates :address , presence: true
-  validates :phone_number, presence: true
-  validates :token, presence: true
+  with_options presence: true do
+    validates :item_id
+    validates :user_id
+    validates :postal_code
+    validates :prefectures
+    validates :municipality
+    validates :address
+    validates :phone_number
+    validates :token
+  end
 
-  
-
+  validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
+  validates :phone_number, format: { with: /\A\d{11}\z/}
+  validates :prefectures, numericality: { other_than: 1 }
 
 
   def save
