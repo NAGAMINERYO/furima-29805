@@ -1,10 +1,11 @@
 class OrdersController < ApplicationController
   before_action :item_params_id, only: [:index, :create]
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :root_path, only: [:index, :create]
   def index
       @order = Order.new
-    if @item.purchaser.present? || current_user.id == @item.user_id
-      root_path
+    if @item.purchaser.present?
+      return redirect_to root_path
     end
   end
 
@@ -15,7 +16,7 @@ class OrdersController < ApplicationController
     if @order.valid?
       pay_item
       @order.save
-      root_path
+      return redirect_to root_path
     else
       render :index
     end
@@ -25,7 +26,6 @@ class OrdersController < ApplicationController
 
   def order_purchaser_params
     params.permit(:postal_code, :prefectures, :municipality, :address, :building, :phone_number, :purchaser_id, :item_id, :token ,).merge(user_id: current_user.id)
-  
   end
 
   def pay_item
@@ -42,7 +42,9 @@ class OrdersController < ApplicationController
   end
 
   def root_path
-    return redirect_to root_path
+    if current_user.id == @item.user_id
+      return redirect_to root_path
+    end
   end
 
 
