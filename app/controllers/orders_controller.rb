@@ -1,18 +1,17 @@
 class OrdersController < ApplicationController
-
+  before_action :item_params_id, only: [:index, :create]
   def index
-      @item = Item.find(params[:item_id])
       @order = Order.new
-    unless user_signed_in?
-      return redirect_to root_path
+    unless authenticate_user!
+      root_path
     end
 
     if @item.purchaser.present?
-      return redirect_to root_path
+      root_path
     end
 
     if current_user.id == @item.user_id
-      return redirect_to root_path
+      root_path
     end
   end
 
@@ -20,11 +19,10 @@ class OrdersController < ApplicationController
 
   def create
     @order = OrderPurchaser.new(order_purchaser_params)
-    @item = Item.find(params[:item_id])
     if @order.valid?
       pay_item
       @order.save
-      return redirect_to root_path
+      root_path
     else
       render :index
     end
@@ -45,6 +43,15 @@ class OrdersController < ApplicationController
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
+
+  def item_params_id
+    @item = Item.find(params[:item_id])
+  end
+
+  def root_path
+    return redirect_to root_path
+  end
+
 
 
 end
