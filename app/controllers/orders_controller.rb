@@ -1,16 +1,9 @@
 class OrdersController < ApplicationController
   before_action :item_params_id, only: [:index, :create]
+  before_action :authenticate_user!, only: [:index]
   def index
       @order = Order.new
-    unless authenticate_user!
-      root_path
-    end
-
-    if @item.purchaser.present?
-      root_path
-    end
-
-    if current_user.id == @item.user_id
+    if @item.purchaser.present? || current_user.id == @item.user_id
       root_path
     end
   end
