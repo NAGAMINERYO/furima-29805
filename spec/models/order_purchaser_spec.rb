@@ -37,6 +37,13 @@ describe OrderPurchaser do
         expect(@order_purchaser.errors.full_messages).to include('Postal codeは不正な値です')
       end
       
+      it 'postal_codeが8桁以上(ハイフンなし)だと登録できない' do
+        @order_purchaser.postal_code = '11111111'
+        @order_purchaser.valid?
+        expect(@order_purchaser.errors.full_messages).to include('Postal codeは不正な値です')
+      end
+
+      
       it 'prefecturesが空だと登録できない' do
         @order_purchaser.prefectures = ''
         @order_purchaser.valid?
@@ -72,6 +79,13 @@ describe OrderPurchaser do
         @order_purchaser.valid?
         expect(@order_purchaser.errors.full_messages).to include('Phone numberは不正な値です')
       end
+
+      it 'tokenが空だと登録できない' do
+        @order_purchaser.token = ''
+        @order_purchaser.valid?
+        expect(@order_purchaser.errors.full_messages).to include('Tokenを入力してください')
+      end
+
 
     end
   end
