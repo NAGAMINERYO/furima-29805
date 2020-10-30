@@ -1,8 +1,19 @@
 class OrdersController < ApplicationController
 
   def index
-    @item = Item.find(params[:item_id])
-    @order = Order.new
+      @item = Item.find(params[:item_id])
+      @order = Order.new
+    unless user_signed_in?
+      return redirect_to root_path
+    end
+
+    if @item.purchaser.present?
+      return redirect_to root_path
+    end
+
+    if current_user.id == @item.user_id
+      return redirect_to root_path
+    end
   end
 
 
