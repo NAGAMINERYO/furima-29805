@@ -3,10 +3,10 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :root_path, only: [:index, :create]
   def index
-      @order = Order.new
     if @item.purchaser.present?
       return redirect_to root_path
     end
+      @order = Order.new
   end
 
 
