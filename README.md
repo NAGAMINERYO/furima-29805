@@ -45,7 +45,7 @@
 
 
 
-## shipping_addresses テーブル
+## order テーブル
 | Column              | Type       | Options     |
 | ------              | ------     | ----------- |
 | postal_code         | string     | null: false |
@@ -54,13 +54,13 @@
 | address             | string     | null: false |
 | building            | string     |
 | phone_number        | string     | null: false |
-| sale                | references | null: false |
+| purchaser           | references | null: false |
 
 ### Association
 - belongs_to :sale
 
 
-## sales テーブル
+## purchaser テーブル
 | Column   | Type       | Options                        |
 | ------   | ------     | -----------                    |
 | item     | references | null: false, foreign_key: true |
