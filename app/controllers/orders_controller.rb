@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :item_params_id, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :root_path, only: [:index, :create]
+  before_action :top_page, only: [:index, :create]
   def index
     if @item.purchaser.present?
       return redirect_to root_path
@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def root_path
+  def top_page
     if current_user.id == @item.user_id
       return redirect_to root_path
     end
